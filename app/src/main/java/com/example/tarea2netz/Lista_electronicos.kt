@@ -13,21 +13,21 @@ class Lista_electronicos : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_electronicos)
 
-        /*var name = intent.getStringExtra("EXTRA_NAME")
-        var pot = intent.getIntExtra("EXTRA_POT", 0)
-        var hr = intent.getIntExtra("EXTRA_HR", 0)
-        var cn = intent.getStringExtra("EXTRA_CN")*/
-        //var info= "$name use $pot W por $hr y esta conectado = $cn"
-        //findViewById<TextView>(R.id.info).text = info
+        var data = DataElectrodomesticos()
+        var electrodomesticos = data.loadData(this)
 
-        var elect = intent.getSerializableExtra("EXTRA_ELECT") as Electrodomestico
+        var totalE=electrodomesticos.total
+        var message:String=""
+        for (i in (1..totalE)){
+            message+="${electrodomesticos.getElect(i).nombre }\n"
+            message+="${electrodomesticos.getElect(i).potencia }\n"
+            message+="${electrodomesticos.getElect(i).horas }\n"
+            message+="${electrodomesticos.getElect(i).conectado }\n\n\n"
+        }
+        findViewById<TextView>(R.id.info).text = message
 
-        //list.add(elect.nombre)
-        //list.add(info)
-        findViewById<TextView>(R.id.info).text = elect.toString()
 
         findViewById<MaterialButton>(R.id.btn_back).setOnClickListener {
-           // list.add(elect.nombre)
             Intent(this, MainActivity::class.java).also {
                 startActivity(it)
             }
