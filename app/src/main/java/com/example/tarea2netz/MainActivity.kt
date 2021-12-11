@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
             val potencia = findViewById<TextInputEditText>(R.id.potencia_elec).text.toString().toInt()
             val horas = findViewById<TextInputEditText>(R.id.horas_elec).text.toString().toInt()
             val conectado = findViewById<CheckBox>(R.id.CB_siempre_conectado).isChecked.toString()
-            val elect = electrodomestico(nombre,potencia,horas,conectado)
+            val elect = Electrodomestico(nombre,potencia,horas,conectado)
 
 
             Intent(this, Lista_electronicos::class.java).also {
