@@ -11,7 +11,7 @@ class DataElectrodomesticos {
 
     fun saveData(electrodomestico: Electrodomestico, con: Context){
         var electrodomesticosSave=loadData(con)
-        if(electrodomesticosSave==null) {
+        if(electrodomesticosSave.total==0) {
             var electrodomesticos=Electrodomesticos()
             electrodomesticos.add(electrodomestico)
             val jsonString = Gson().toJson(electrodomesticos)
@@ -36,8 +36,10 @@ class DataElectrodomesticos {
 
         val pref=PreferenceManager.getDefaultSharedPreferences(con)
         val jsonString = pref.getString(key, null)
-        val auxElectrodomesticos = Gson().fromJson(jsonString,Electrodomesticos::class.java)
-
+        var auxElectrodomesticos=Electrodomesticos()
+        if(jsonString!=null) {
+            auxElectrodomesticos = Gson().fromJson(jsonString, Electrodomesticos::class.java)
+        }
         return auxElectrodomesticos
     }
 
